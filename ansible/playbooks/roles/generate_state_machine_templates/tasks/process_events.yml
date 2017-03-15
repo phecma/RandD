@@ -1,0 +1,2 @@
+- name: Create the event template
+  template: "src=events_template.json.j2 dest=generated/events/{{event}}.json"

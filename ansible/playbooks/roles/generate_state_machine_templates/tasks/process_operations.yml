@@ -1,0 +1,8 @@
+- name: Create the operation template
+  template: "src=operations_template.json.j2 dest=generated/operations/{{operation}}.json"
+
+- name: Process transitions
+  include: process_transitions.yml
+  with_items: "{{ data.operations[operation].transitions }}"
+  loop_control:
+    loop_var: transition

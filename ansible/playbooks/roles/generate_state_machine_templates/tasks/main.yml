@@ -1,0 +1,34 @@
+- name: Clean generated directory
+  file: dest=generated state=absent
+
+- name: Create generated directory
+  file: dest=generated state=directory
+
+- name: Clean operations directory
+  file: dest=generated/operations state=absent
+
+- name: Create operations directory
+  file: dest=generated/operations state=directory
+
+- name: Clean transitions directory
+  file: dest=generated/transitions state=absent
+
+- name: Create transitions directory
+  file: dest=generated/transitions state=directory
+
+- name: Clean events directory
+  file: dest=generated/events state=absent
+
+- name: Create events directory
+  file: dest=generated/events state=directory
+
+- name: Include variables from data.yml
+  include_vars:
+    file: data.yml
+    name: data
+
+- name: Process operations
+  include: process_operations.yml
+  with_items: "{{ data.operations }}"
+  loop_control:
+    loop_var: operation

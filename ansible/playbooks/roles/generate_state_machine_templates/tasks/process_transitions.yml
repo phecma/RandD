@@ -1,0 +1,8 @@
+- name: Create the transition template
+  template: "src=transitions_template.json.j2 dest=generated/transitions/{{transition}}.json"
+
+- name: Process events
+  include: process_events.yml
+  with_items: "{{ data.operations[operation].transitions[transition].events }}"
+  loop_control:
+    loop_var: event

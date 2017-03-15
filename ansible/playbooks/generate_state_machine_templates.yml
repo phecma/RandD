@@ -1,0 +1,4 @@
+- hosts: localhost
+  connection: local
+  roles:
+    - generate_state_machine_templates
